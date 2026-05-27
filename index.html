@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yahia Ashraf | Software Engineer</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts: Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Base & Typography */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #050505; /* Deep Black */
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+
+        /* Metallic Gold Gradients */
+        .text-gold {
+            background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .bg-gold {
+            background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+            transition: all 0.3s ease;
+        }
+        
+        .bg-gold:hover {
+            background: linear-gradient(to right, #FCF6BA, #BF953F, #FBF5B7, #AA771C, #B38728);
+            box-shadow: 0 0 20px rgba(191, 149, 63, 0.4);
+        }
+
+        /* Glassmorphism Components */
+        .glass-nav {
+            background: rgba(5, 5, 5, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(191, 149, 63, 0.2);
+        }
+
+        .glass-card {
+            background: linear-gradient(145deg, rgba(20, 20, 20, 0.8) 0%, rgba(10, 10, 10, 0.9) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(191, 149, 63, 0.5);
+            box-shadow: 0 10px 30px -10px rgba(191, 149, 63, 0.15);
+        }
+
+        /* Ambient Glow Effects */
+        .glow-bg {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(191, 149, 63, 0.05) 0%, rgba(0,0,0,0) 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Fade-In Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Staggered delays for child elements */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #BF953F; }
+    </style>
+</head>
+<body class="antialiased selection:bg-[#BF953F] selection:text-black">
+
+    <!-- Navigation Bar -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex justify-between items-center h-20">
+                <a href="#home" class="text-2xl font-bold tracking-wider text-gold uppercase">Yahia Ashraf</a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center text-sm font-medium tracking-wide">
+                    <a href="#home" class="text-gray-300 hover:text-[#FCF6BA] transition-colors">Home</a>
+                    <a href="#services" class="text-gray-300 hover:text-[#FCF6BA] transition-colors">Consulting Services</a>
+                    <a href="#awards" class="text-gray-300 hover:text-[#FCF6BA] transition-colors">Awards</a>
+                    <a href="#about" class="text-gray-300 hover:text-[#FCF6BA] transition-colors">About</a>
+                    <a href="#contact" class="px-5 py-2 border border-[#BF953F] text-[#FCF6BA] hover:bg-[#BF953F] hover:text-black transition-all rounded-sm uppercase text-xs">Contact</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-gray-300 hover:text-white focus:outline-none" id="mobile-menu-btn">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-[#0a0a0a] border-b border-gray-800" id="mobile-menu">
+            <div class="px-4 pt-2 pb-6 space-y-2 text-center">
+                <a href="#home" class="block px-3 py-2 text-gray-300 hover:text-[#FCF6BA]">Home</a>
+                <a href="#services" class="block px-3 py-2 text-gray-300 hover:text-[#FCF6BA]">Consulting Services</a>
+                <a href="#awards" class="block px-3 py-2 text-gray-300 hover:text-[#FCF6BA]">Awards</a>
+                <a href="#about" class="block px-3 py-2 text-gray-300 hover:text-[#FCF6BA]">About</a>
+                <a href="#contact" class="block px-3 py-2 text-[#FCF6BA] font-bold">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="relative min-h-screen flex items-center justify-center pt-20">
+        <div class="glow-bg"></div>
+        <div class="max-w-5xl mx-auto px-6 text-center z-10">
+            <h2 class="fade-in text-sm md:text-base text-gray-400 uppercase tracking-[0.3em] mb-4">Software Engineer</h2>
+            <h1 class="fade-in delay-100 text-5xl md:text-7xl lg:text-8xl font-bold mb-8 tracking-tight">
+                Yahia <span class="text-gold">Ashraf</span>
+            </h1>
+            <p class="fade-in delay-200 text-base md:text-lg text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed font-light">
+                Postgraduate student pursuing a Diploma in Computer Science at the Arab Academy for Science, Technology and Maritime Transport (AASTMT). Proud Member of the Communications and Information Technology Committee at "Engineers for Egypt".
+            </p>
+            <div class="fade-in delay-300">
+                <a href="#contact" class="inline-block bg-gold text-black px-10 py-4 rounded-sm font-semibold tracking-widest uppercase text-sm">
+                    Book a Consultation
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Consulting Services Section -->
+    <section id="services" class="py-24 bg-[#080808] border-t border-b border-[#151515]">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="text-center mb-16 fade-in">
+                <h3 class="text-sm text-gold uppercase tracking-[0.2em] mb-2">Expertise</h3>
+                <h2 class="text-3xl md:text-5xl font-bold text-white">Consulting Services</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Service Card 1 -->
+                <div class="glass-card p-10 rounded-sm fade-in">
+                    <div class="w-14 h-14 bg-black border border-[#BF953F] flex items-center justify-center rounded-full mb-6">
+                        <i class="fa-solid fa-code-branch text-[#FCF6BA] text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-white">Software Architecture</h3>
+                    <p class="text-gray-400 font-light leading-relaxed text-sm">
+                        Designing scalable, robust, and high-performance software systems tailored to enterprise needs, ensuring future-proof codebases.
+                    </p>
+                </div>
+                
+                <!-- Service Card 2 -->
+                <div class="glass-card p-10 rounded-sm fade-in delay-100">
+                    <div class="w-14 h-14 bg-black border border-[#BF953F] flex items-center justify-center rounded-full mb-6">
+                        <i class="fa-solid fa-chess-knight text-[#FCF6BA] text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-white">IT Strategy</h3>
+                    <p class="text-gray-400 font-light leading-relaxed text-sm">
+                        Aligning technological infrastructure with business goals to drive innovation, operational efficiency, and sustainable growth.
+                    </p>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div class="glass-card p-10 rounded-sm fade-in delay-200">
+                    <div class="w-14 h-14 bg-black border border-[#BF953F] flex items-center justify-center rounded-full mb-6">
+                        <i class="fa-solid fa-lightbulb text-[#FCF6BA] text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-white">Technical Consultation</h3>
+                    <p class="text-gray-400 font-light leading-relaxed text-sm">
+                        Providing expert insights and executive advising on modern tech stacks, AI integrations, and technical debt resolution.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards & Honors Section -->
+    <section id="awards" class="py-24 relative">
+        <div class="glow-bg" style="left: 80%; top: 30%;"></div>
+        <div class="max-w-5xl mx-auto px-6 lg:px-12">
+            <div class="mb-16 fade-in">
+                <h3 class="text-sm text-gold uppercase tracking-[0.2em] mb-2">Recognition</h3>
+                <h2 class="text-3xl md:text-5xl font-bold text-white">Awards & Honors</h2>
+            </div>
+
+            <div class="space-y-12 border-l border-gray-800 pl-8 md:pl-12 relative">
+                <!-- Award 1 -->
+                <div class="relative fade-in">
+                    <!-- Gold Dot -->
+                    <div class="absolute -left-[41px] md:-left-[57px] top-1 w-4 h-4 rounded-full bg-gold shadow-[0_0_10px_#BF953F]"></div>
+                    <div class="glass-card p-8 rounded-sm">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                            <h3 class="text-2xl font-bold text-white">Award of Excellence</h3>
+                            <span class="inline-block mt-2 md:mt-0 text-sm font-semibold text-black bg-gold px-3 py-1 rounded-sm">2025</span>
+                        </div>
+                        <h4 class="text-lg text-gold mb-4">AI Ambassadors Program</h4>
+                        <p class="text-gray-400 font-light leading-relaxed">
+                            Organized by <strong>Engineers For a Sustainable Egypt</strong> & <strong>National Telecommunication Institute (NTI)</strong>. Recognized for outstanding performance in a comprehensive training program focused on Artificial Intelligence and its real-world applications.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Award 2 -->
+                <div class="relative fade-in delay-100">
+                    <!-- Gold Dot -->
+                    <div class="absolute -left-[41px] md:-left-[57px] top-1 w-4 h-4 rounded-full bg-gold shadow-[0_0_10px_#BF953F]"></div>
+                    <div class="glass-card p-8 rounded-sm">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                            <h3 class="text-2xl font-bold text-white">University Shield for Best Graduation Project</h3>
+                            <span class="inline-block mt-2 md:mt-0 text-sm font-semibold text-black bg-gold px-3 py-1 rounded-sm">2018</span>
+                        </div>
+                        <h4 class="text-lg text-gold mb-4">Arab Academy for Science, Technology and Maritime Transport</h4>
+                        <p class="text-gray-400 font-light leading-relaxed">
+                            Awarded by AASTMT for exceptional innovation, technical depth, and flawless execution demonstrated in the final year engineering project.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick About & Contact CTA -->
+    <section id="about" class="py-24 bg-[#080808] border-t border-[#151515]">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 fade-in text-white">Committed to Engineering Excellence</h2>
+            <p class="text-gray-400 font-light leading-relaxed mb-12 fade-in delay-100">
+                Bridging the gap between academic research and industry-grade engineering. With a profound dedication to sustainable tech development and AI integration, I strive to elevate digital infrastructures to premium standards.
+            </p>
+        </div>
+    </section>
+
+    <section id="contact" class="py-24 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-6 text-center z-10 relative fade-in">
+            <h2 class="text-4xl md:text-6xl font-bold mb-6">Let's <span class="text-gold">Connect</span></h2>
+            <p class="text-gray-400 mb-10 max-w-2xl mx-auto">Available for technical consultations, executive engineering roles, and strategic tech partnerships.</p>
+            <a href="mailto:contact@yahiaashraf.com" class="inline-block bg-transparent border-2 border-[#BF953F] text-[#FCF6BA] hover:bg-[#BF953F] hover:text-black transition-all px-12 py-4 rounded-sm font-semibold tracking-widest uppercase text-sm">
+                Send an Email
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-[#151515] py-10">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-6 md:mb-0">
+                <span class="text-2xl font-bold tracking-wider text-white uppercase">Yahia <span class="text-gold">Ashraf</span></span>
+                <p class="text-gray-600 text-sm mt-2">© 2026 Yahia Ashraf. All rights reserved.</p>
+            </div>
+            
+            <!-- Social Links -->
+            <div class="flex space-x-6">
+                <a href="#" class="w-10 h-10 rounded-full border border-gray-800 flex items-center justify-center text-gray-400 hover:border-[#BF953F] hover:text-[#FCF6BA] transition-all">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full border border-gray-800 flex items-center justify-center text-gray-400 hover:border-[#BF953F] hover:text-[#FCF6BA] transition-all">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+                <a href="mailto:contact@yahiaashraf.com" class="w-10 h-10 rounded-full border border-gray-800 flex items-center justify-center text-gray-400 hover:border-[#BF953F] hover:text-[#FCF6BA] transition-all">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Interactions and Animations -->
+    <script>
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Intersection Observer for Fade-In Animations
+        const faders = document.querySelectorAll('.fade-in');
+        
+        const appearOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('appear');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, appearOptions);
+
+        faders.forEach(fader => {
+            appearOnScroll.observe(fader);
+        });
+    </script>
+</body>
+</html>
