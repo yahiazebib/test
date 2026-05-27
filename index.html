@@ -1,422 +1,335 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yahia Ashraf - Software Engineer</title>
-    
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Yahia Ashraf | Software Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        obsidian: '#0a0a0a',
+                        charcoal: '#111111',
+                        electric: '#00d4ff',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
 
     <style>
-        /* --- CSS Variables --- */
-        :root {
-            /* Color Palette */
-            --bg-white: #ffffff;
-            --bg-off-white: #f8fafc;
-            --navy-blue: #0f172a;      /* Deep Professional Navy */
-            --electric-blue: #2563eb;  /* Vibrant Tech Blue */
-            --sky-blue: #bae6fd;       /* Subtle Highlight Blue */
-            --text-main: #334155;
-            --text-light: #64748b;
-            
-            /* UI Elements */
-            --border-radius: 12px;
-            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            --card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
-            --transition: all 0.3s ease;
-        }
-
-        /* --- Global Styles --- */
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-white);
-            color: var(--text-main);
-            line-height: 1.6;
+            background-color: #0a0a0a;
+            color: #f3f4f6;
+            overflow-x: hidden;
         }
 
-        h1, h2, h3, h4, h5 {
-            margin: 0;
-            color: var(--navy-blue);
-            font-weight: 700;
-            line-height: 1.2;
-        }
-
-        p {
-            margin: 0 0 1rem 0;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* Section Setup */
-        section {
-            padding: 6rem 0;
-            scroll-margin-top: 60px; /* Offset for sticky navbar */
-        }
-
-        .section-title {
-            font-size: 2.2rem;
-            margin-bottom: 3rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 50%;
-            height: 4px;
-            background: var(--electric-blue);
-            border-radius: 2px;
-        }
-
-        /* --- Navigation Bar --- */
-        .navbar {
+        /* Tech-Startup Starfield & Gradient Background */
+        .bg-animated {
             position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.9);
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -2;
+            background: radial-gradient(circle at 20% 30%, rgba(0, 212, 255, 0.05), transparent 40%),
+                        radial-gradient(circle at 80% 70%, rgba(0, 80, 255, 0.05), transparent 40%);
+            animation: gradientShift 15s ease infinite alternate;
+        }
+
+        .cyber-grid {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -1;
+            background-image: radial-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 100%);
+        }
+
+        @keyframes gradientShift {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        /* Glassmorphism */
+        .glass-nav {
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-            z-index: 1000;
-            padding: 1.2rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        /* Hover Effects & Neon Glow */
+        .neon-hover {
+            transition: all 0.4s ease-out;
+        }
+        
+        .neon-hover:hover {
+            transform: translateY(-8px);
+            border-color: #00d4ff;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3), 
+                        inset 0 0 10px rgba(0, 212, 255, 0.05);
+            background: rgba(0, 212, 255, 0.03);
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--navy-blue);
-            letter-spacing: -0.5px;
+        .text-glow {
+            text-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
         }
 
-        .logo span {
-            color: var(--electric-blue);
+        .timeline-dot {
+            box-shadow: 0 0 15px #00d4ff;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-            margin: 0;
-            padding: 0;
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-
-        .nav-links a {
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: var(--text-main);
-            transition: var(--transition);
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
         }
-
-        .nav-links a:hover {
-            color: var(--electric-blue);
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
         }
-
-        /* --- Hero Section --- */
-        #about {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            background: radial-gradient(circle at top right, var(--sky-blue) 0%, transparent 40%),
-                        radial-gradient(circle at bottom left, var(--bg-off-white) 0%, transparent 40%);
-            padding-top: 80px;
-        }
-
-        .hero-content {
-            max-width: 800px;
-        }
-
-        .hero-title {
-            font-size: 4.5rem;
-            letter-spacing: -1.5px;
-            margin-bottom: 0.5rem;
-        }
-
-        .hero-subtitle {
-            font-size: 2rem;
-            color: var(--electric-blue);
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-        }
-
-        .hero-text {
-            font-size: 1.25rem;
-            color: var(--text-light);
-            max-width: 650px;
-            line-height: 1.7;
-        }
-
-        /* --- Shared Card Styles --- */
-        .card {
-            background: var(--bg-white);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            border-radius: var(--border-radius);
-            padding: 2rem;
-            box-shadow: var(--card-shadow);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 1.5rem;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--card-shadow-hover);
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 4px;
-            background: var(--electric-blue);
-            opacity: 0;
-            transition: var(--transition);
-        }
-
-        .card:hover::before {
-            opacity: 1;
-        }
-
-        .card-title {
-            font-size: 1.25rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .card-subtitle {
-            color: var(--electric-blue);
-            font-weight: 600;
-            font-size: 0.95rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .card-text {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            margin: 0;
-        }
-
-        /* --- Certifications Section (Grid) --- */
-        #certifications {
-            background-color: var(--bg-off-white);
-        }
-
-        .cert-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .cert-card {
-            background: var(--bg-white);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--card-shadow);
-            border: 1px solid rgba(0,0,0,0.03);
-            transition: var(--transition);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .cert-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--card-shadow-hover);
-            border-color: var(--sky-blue);
-        }
-
-        .cert-title {
-            font-size: 1.1rem;
-            color: var(--navy-blue);
-            margin-bottom: 0.5rem;
-        }
-
-        .cert-issuer {
-            font-size: 0.85rem;
-            color: var(--electric-blue);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* --- Awards Section --- */
-        .award-description {
-            margin-top: 1rem;
-            color: var(--text-main);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        /* --- Footer --- */
-        footer {
-            background: var(--navy-blue);
-            color: var(--bg-white);
-            text-align: center;
-            padding: 2rem 0;
-            font-size: 0.9rem;
-        }
-
-        /* --- Responsive Design --- */
-        @media (max-width: 768px) {
-            .hero-title { font-size: 3rem; }
-            .hero-subtitle { font-size: 1.5rem; }
-            .hero-text { font-size: 1.1rem; }
-            
-            .nav-container {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            .nav-links {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 1rem;
-            }
-            .section-title { font-size: 1.8rem; }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00d4ff;
         }
     </style>
 </head>
-<body>
+<body class="antialiased selection:bg-electric selection:text-obsidian">
 
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <div class="container nav-container">
-            <a href="#about" class="logo">Yahia<span>.</span>Ashraf</a>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#certifications">Certifications</a></li>
-                <li><a href="#awards">Awards</a></li>
-            </ul>
+    <!-- Background Elements -->
+    <div class="bg-animated"></div>
+    <div class="cyber-grid"></div>
+
+    <!-- Header / Navbar -->
+    <nav class="fixed w-full top-0 z-50 glass-nav transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#intro" class="text-xl font-bold tracking-wider text-white hover:text-electric transition-colors duration-300">YA<span class="text-electric">.</span></a>
+            <div class="hidden md:flex space-x-8 text-sm font-medium text-gray-400">
+                <a href="#intro" class="hover:text-electric transition-colors">Intro</a>
+                <a href="#education" class="hover:text-electric transition-colors">Education</a>
+                <a href="#experience" class="hover:text-electric transition-colors">Experience</a>
+                <a href="#certifications" class="hover:text-electric transition-colors">Certifications</a>
+                <a href="#awards" class="hover:text-electric transition-colors">Awards</a>
+            </div>
+            <!-- Mobile Menu Icon (Visual Only) -->
+            <div class="md:hidden text-electric">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="about">
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">Yahia Ashraf</h1>
-                <h2 class="hero-subtitle">Software Engineer</h2>
-                <p class="hero-text">
-                    A professional transitioning into software engineering with a dedicated focus on building clean, scalable, and impactful technology. Driven by a passion for modern systems and continuous learning to craft solutions that matter.
-                </p>
-            </div>
+    <section id="intro" class="min-h-screen flex items-center justify-center pt-20 px-6 relative">
+        <div class="max-w-4xl mx-auto text-center z-10">
+            <h2 class="text-electric font-semibold tracking-[0.2em] uppercase text-sm mb-4 animate-pulse-slow">System Online</h2>
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500 drop-shadow-lg">
+                Yahia Ashraf
+            </h1>
+            <p class="text-2xl md:text-3xl font-light text-gray-300 mb-12">
+                <span class="text-electric text-glow font-medium">Software Engineer</span> building the future.
+            </p>
+            <a href="#education" class="inline-block px-10 py-4 rounded-full border border-electric text-electric font-semibold text-lg hover:bg-electric hover:text-obsidian transition-all duration-300 shadow-[0_0_20px_rgba(0,212,255,0.2)] hover:shadow-[0_0_30px_rgba(0,212,255,0.6)]">
+                View My Journey
+            </a>
         </div>
     </section>
 
     <!-- Education Section -->
-    <section id="education">
-        <div class="container">
-            <h2 class="section-title">Education</h2>
-            <div class="card">
-                <h3 class="card-title">Postgraduate Diploma in Computer Science</h3>
-                <p class="card-subtitle">Arab Academy for Science, Technology and Maritime Transport (AASTMT)</p>
+    <section id="education" class="py-24 px-6">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold mb-12 text-white flex items-center gap-4">
+                <span class="text-electric block w-8 h-[2px] bg-electric"></span> Education
+            </h2>
+            
+            <div class="border-l border-electric/30 ml-3 pl-10 relative group cursor-default">
+                <!-- Timeline Dot -->
+                <div class="absolute w-4 h-4 bg-electric rounded-full -left-[8.5px] top-1 timeline-dot group-hover:scale-125 transition-transform duration-300"></div>
+                
+                <div class="glass-card p-8 rounded-xl neon-hover">
+                    <h3 class="text-2xl font-bold text-white mb-2">Postgraduate Diploma in Computer Science</h3>
+                    <h4 class="text-lg text-gray-400 mb-4">Arab Academy for Science, Technology and Maritime Transport (AASTMT)</h4>
+                    <div class="inline-block px-4 py-2 bg-electric/10 border border-electric/20 rounded-md">
+                        <p class="text-electric font-semibold tracking-wide flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+                            GPA: 3.92 / Academic Excellence
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Experience Section -->
-    <section id="experience">
-        <div class="container">
-            <h2 class="section-title">Experience</h2>
-            <div class="card">
-                <h3 class="card-title">Member of the Communications and Information Technology Committee</h3>
-                <p class="card-subtitle">Engineers for Egypt</p>
-                <p class="card-text">2025 – Present</p>
+    <section id="experience" class="py-24 px-6 bg-charcoal/30">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold mb-12 text-white flex items-center gap-4">
+                <span class="text-electric block w-8 h-[2px] bg-electric"></span> Experience
+            </h2>
+            
+            <div class="border-l border-electric/30 ml-3 pl-10 relative group cursor-default">
+                <!-- Timeline Dot -->
+                <div class="absolute w-4 h-4 bg-electric rounded-full -left-[8.5px] top-1 timeline-dot group-hover:scale-125 transition-transform duration-300"></div>
+                
+                <div class="glass-card p-8 rounded-xl neon-hover">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                        <h3 class="text-2xl font-bold text-white">Communications & IT Committee Member</h3>
+                        <span class="text-sm font-medium text-electric mt-2 md:mt-0 bg-electric/10 px-3 py-1 rounded-full border border-electric/30">2025 - Present</span>
+                    </div>
+                    <h4 class="text-lg text-gray-400">Engineers for Egypt</h4>
+                    <p class="text-gray-500 mt-4 leading-relaxed">
+                        Contributing to tech initiatives, orchestrating digital frameworks, and fostering technological advancement within the engineering community.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Certifications Section -->
-    <section id="certifications">
-        <div class="container">
-            <h2 class="section-title">Certifications</h2>
-            <div class="cert-grid">
-                <div class="cert-card">
-                    <h4 class="cert-title">Prompt Engineering For AI Systems</h4>
-                    <span class="cert-issuer">Dubai Future Foundation (UAE)</span>
+    <section id="certifications" class="py-24 px-6">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold mb-12 text-white flex items-center gap-4">
+                <span class="text-electric block w-8 h-[2px] bg-electric"></span> Certifications
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Cert 1 -->
+                <div class="glass-card p-6 rounded-xl neon-hover cursor-crosshair flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 bg-electric/10 rounded-lg flex items-center justify-center mb-4 text-electric border border-electric/30">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-2">Prompt Engineering For AI Systems</h3>
+                    </div>
+                    <p class="text-sm text-gray-400 mt-4">Dubai Future Foundation</p>
                 </div>
-                <div class="cert-card">
-                    <h4 class="cert-title">Artificial Intelligence Ambassadors Program</h4>
-                    <span class="cert-issuer">NTI | Ministry of Communications & IT</span>
+
+                <!-- Cert 2 -->
+                <div class="glass-card p-6 rounded-xl neon-hover cursor-crosshair flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 bg-electric/10 rounded-lg flex items-center justify-center mb-4 text-electric border border-electric/30">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-2">AI Ambassadors Program</h3>
+                    </div>
+                    <p class="text-sm text-gray-400 mt-4">NTI | MCIT</p>
                 </div>
-                <div class="cert-card">
-                    <h4 class="cert-title">Introduction to Cybersecurity</h4>
-                    <span class="cert-issuer">Cisco</span>
+
+                <!-- Cert 3 -->
+                <div class="glass-card p-6 rounded-xl neon-hover cursor-crosshair flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 bg-electric/10 rounded-lg flex items-center justify-center mb-4 text-electric border border-electric/30">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-2">Cybersecurity & OS</h3>
+                    </div>
+                    <p class="text-sm text-gray-400 mt-4">Cisco</p>
                 </div>
-                <div class="cert-card">
-                    <h4 class="cert-title">Introduction to AI</h4>
-                    <span class="cert-issuer">Huawei</span>
+
+                <!-- Cert 4 -->
+                <div class="glass-card p-6 rounded-xl neon-hover cursor-crosshair flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 bg-electric/10 rounded-lg flex items-center justify-center mb-4 text-electric border border-electric/30">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-2">Artificial Intelligence</h3>
+                    </div>
+                    <p class="text-sm text-gray-400 mt-4">Huawei</p>
                 </div>
-                <div class="cert-card">
-                    <h4 class="cert-title">Operating Systems</h4>
-                    <span class="cert-issuer">Cisco</span>
+
+                <!-- Cert 5 -->
+                <div class="glass-card p-6 rounded-xl neon-hover cursor-crosshair flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 bg-electric/10 rounded-lg flex items-center justify-center mb-4 text-electric border border-electric/30">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-2">Digital Transformation</h3>
+                    </div>
+                    <p class="text-sm text-gray-400 mt-4">Nile University</p>
                 </div>
-                <div class="cert-card">
-                    <h4 class="cert-title">Governance and Digital Transformation Ambassadors Program</h4>
-                    <span class="cert-issuer">Nile University</span>
+
+                <!-- Cert 6 -->
+                <div class="glass-card p-6 rounded-xl neon-hover cursor-crosshair flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 bg-electric/10 rounded-lg flex items-center justify-center mb-4 text-electric border border-electric/30">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-2">Project Management</h3>
+                    </div>
+                    <p class="text-sm text-gray-400 mt-4">IBMI Berlin</p>
                 </div>
-                <div class="cert-card">
-                    <h4 class="cert-title">Project Management</h4>
-                    <span class="cert-issuer">IBMI, Berlin, Germany</span>
-                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Awards Section -->
-    <section id="awards">
-        <div class="container">
-            <h2 class="section-title">Awards & Recognition</h2>
+    <!-- Awards Section (The Spotlight) -->
+    <section id="awards" class="py-24 px-6 bg-charcoal/40 border-t border-white/5">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-extrabold text-white mb-4 tracking-tight">The Spotlight</h2>
+                <p class="text-electric uppercase tracking-[0.3em] text-sm text-glow">Honors & Accolades</p>
+            </div>
             
-            <div class="card">
-                <h3 class="card-title">Award of Excellence, AI Ambassadors Program</h3>
-                <p class="card-subtitle">Engineers For a Sustainable Egypt & National Telecommunication Institute (NTI)</p>
-                <p class="award-description">Recognized for outstanding performance in a training program focused on AI and its applications.</p>
-            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Award 1 -->
+                <div class="glass-card p-10 rounded-2xl neon-hover flex flex-col justify-between text-center relative overflow-hidden group cursor-pointer">
+                    <!-- Glow effect in background -->
+                    <div class="absolute inset-0 bg-gradient-to-b from-electric/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 mx-auto bg-obsidian rounded-full flex items-center justify-center mb-6 border border-electric shadow-[0_0_15px_rgba(0,212,255,0.4)]">
+                            <svg class="w-8 h-8 text-electric" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">Award of Excellence</h3>
+                        <h4 class="text-md text-electric mb-6 font-medium">AI Ambassadors Program</h4>
+                        <p class="text-gray-400 leading-relaxed">
+                            Recognized for outstanding performance and exceptional contributions during rigorous Artificial Intelligence training.
+                        </p>
+                    </div>
+                </div>
 
-            <div class="card">
-                <h3 class="card-title">University Shield for Best Graduation Project</h3>
-                <p class="card-subtitle">Arab Academy for Science, Technology and Maritime Transport (AASTMT)</p>
-                <p class="award-description">Awarded for exceptional innovation and execution in the final year project.</p>
-            </div>
+                <!-- Award 2 -->
+                <div class="glass-card p-10 rounded-2xl neon-hover flex flex-col justify-between text-center relative overflow-hidden group cursor-pointer">
+                    <div class="absolute inset-0 bg-gradient-to-b from-electric/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 mx-auto bg-obsidian rounded-full flex items-center justify-center mb-6 border border-electric shadow-[0_0_15px_rgba(0,212,255,0.4)]">
+                            <svg class="w-8 h-8 text-electric" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">University Shield</h3>
+                        <h4 class="text-md text-electric mb-6 font-medium">Best Graduation Project</h4>
+                        <p class="text-gray-400 leading-relaxed">
+                            Awarded by AASTMT in recognition of exceptional technical innovation and system architecture excellence.
+                        </p>
+                    </div>
+                </div>
 
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Yahia Ashraf. Designed with clean code.</p>
-        </div>
+    <footer class="py-8 border-t border-white/5 text-center text-sm text-gray-500">
+        <p>&copy; <script>document.write(new Date().getFullYear())</script> Yahia Ashraf. System Architected with Precision.</p>
     </footer>
 
 </body>
